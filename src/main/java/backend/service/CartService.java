@@ -10,6 +10,6 @@ public interface CartService {
 	
 	public CartResponseDTO getUserCart(long userId);
 	
-	public void cartClosedForOrder(long userId, long cartId);
+	public void cartClosedForOrder(long userId);
 	
 }

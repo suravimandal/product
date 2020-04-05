@@ -77,7 +77,7 @@ public class CartServiceImpl implements CartService {
 			Cart cart = cartOpt.get();
 			BigDecimal total = new BigDecimal(0);
 			for (Product product : cart.getProducts()) {
-				if(product.isDeleted()) {
+				if(product.getIsDeleted()) {
 					continue;
 				}
 				CartResponseDTO.ProductDTO productDTO = new CartResponseDTO.ProductDTO();
@@ -93,8 +93,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public void cartClosedForOrder(long userId, long cartId) {
-		Optional<Cart> cartOpt = cartRepository.findById(cartId);
+	public void cartClosedForOrder(long userId) {
+		Optional<Cart> cartOpt = getCartByUserId(userId);
 		if(cartOpt.isPresent()) {
 			Cart cart = cartOpt.get();
 			if(cart.getUserId() != userId) {
@@ -102,9 +102,9 @@ public class CartServiceImpl implements CartService {
 			}
 			Set<Product> products = cart.getProducts();
 			for (Product product: products) {
-				product.setDeleted(true);
+				product.setIsDeleted(true);
 			}
-			cart.setDeleted(true);
+			cart.setIsDeleted(true);
 			cart.setProducts(products);
 			cartRepository.save(cart);
 		}
@@ -113,7 +113,8 @@ public class CartServiceImpl implements CartService {
 	private Optional<Cart> getCartByUserId(long userId) {
 		Cart criteria = new Cart();
 		criteria.setUserId(userId);
-
+		criteria.setIsDeleted(false);
+		
 		Example<Cart> exCart = Example.of(criteria);
 		return cartRepository.findOne(exCart);
 	}

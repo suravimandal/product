@@ -25,7 +25,7 @@ public abstract class BaseModel implements Serializable{
 	    private ZonedDateTime updatedAt;
 	    
 	    @Column(name="is_deleted")
-	    private boolean isDeleted;
+	    private Boolean isDeleted = false;
 	    
 	   
 	    @PrePersist

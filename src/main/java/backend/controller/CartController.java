@@ -36,9 +36,9 @@ public class CartController {
 		return cartService.getUserCart(userId);
 	}
 	
-	@DeleteMapping("/users/{userId}/carts/{cartId}")
+	@DeleteMapping("/users/{userId}/carts")
 	@ResponseStatus(HttpStatus.OK)
-	public void deleteCartForOrder(@PathVariable long userId, @PathVariable long cartId) {
-		cartService.cartClosedForOrder(userId, cartId);
+	public void deleteCartForOrder(@PathVariable long userId) {
+		cartService.cartClosedForOrder(userId);
 	}
 }
