@@ -18,6 +18,7 @@ public class CartResponseDTO {
 	@Getter
 	@Setter
 	public static class ProductDTO {
+		private long id;
 		private String name;
 		private BigDecimal price;
 	}
