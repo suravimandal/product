@@ -44,4 +44,6 @@ public abstract class BaseModel implements Serializable{
 	        	updatedAt = ZonedDateTime.now();
 	        }
 	    }
+
+
 }

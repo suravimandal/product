@@ -39,4 +39,10 @@ public class Product extends BaseModel {
     
     @ManyToMany
     private Set<Cart> carts;
+	public Long getUserId(){
+		return userId;
+	};
+	public Long getId(){
+		return id;
+	};
 }
